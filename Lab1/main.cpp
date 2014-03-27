@@ -138,23 +138,23 @@ int main()
     * TEST PHASE 9                                       *
     * Create a set of strings                            *
     ******************************************************/
-    cout << "\nTEST PHASE 9: Create a set of strings\n\n";
+    // cout << "\nTEST PHASE 9: Create a set of strings\n\n";
 
-    Set<string> words;
+    // Set<string> words;
 
-    string w;
+    // string w;
 
-    cout << "Enter some text (end with stop)" << endl;
+    // cout << "Enter some text (end with stop)" << endl;
 
-    while(cin >> w && w != "stop")
-    {
-        //transform all upper-case letters to lower-case letters
-        transform(w.begin(), w.end(), w.begin(), ::tolower);
-        words = words + w;
-    }
+    // while(cin >> w && w != "stop")
+    // {
+    //     //transform all upper-case letters to lower-case letters
+    //     transform(w.begin(), w.end(), w.begin(), ::tolower);
+    //     words = words + w;
+    // }
 
-    cout << "The words sorted alphabetically: "
-         << words << endl;
+    // cout << "The words sorted alphabetically: "
+    //      << words << endl;
 
 
     return 0;
