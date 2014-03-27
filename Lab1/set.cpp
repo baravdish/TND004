@@ -370,9 +370,16 @@ Set<T>::Set ()
 template<typename T>
 Set<T>::Set (T n)
 {
+    init(); // insert the dummy nodes
+
     Node *p = new Node(n, tail, head);
-    head->next = p;
+
+    //>>>>>>>>>>>>>> CRASH HERE: <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    // head->next = p; 
+    
     tail->prev = p;
+    
+    counter = 1;
 }
 
 
@@ -386,6 +393,7 @@ Set<T>::Set (T a[], int n)
     {
         insert(p->next, a[i]);
         p = p->next;
+        counter++;
     }
 
     // Code review: This might go faster or slower than O(n). Worth to check it out later.
@@ -433,7 +441,7 @@ Set<T>& Set<T>::operator=(const Set& b)
 template<typename T>
 bool Set<T>::is_empty () const
 {
-    if (counter == 0)
+    if (counter == 0) // OR: head->next != tail
     {
         return true;
     }
@@ -445,8 +453,19 @@ bool Set<T>::is_empty () const
 template<typename T>
 bool Set<T>::is_member (T val) const
 {
-   //ADD CODE
-   return false;
+    
+    Node *p = head->next;
+    while(p != tail)
+    {
+        if(p->value == val)
+        {
+            return true;
+        }
+        p = p->next;
+    }
+
+
+    return false;
 }
 
 
@@ -454,8 +473,17 @@ bool Set<T>::is_member (T val) const
 template<typename T>
 int Set<T>::cardinality() const
 {
-    //ADD CODE
-    return 0;
+
+    return counter;
+
+    // OR: 
+    // int i = 0
+    // Node *p = head->next;
+    // while(p != tail)
+    // {
+    //      i++;
+    // }
+    // reutrn i;
 }
 
 
@@ -463,7 +491,14 @@ int Set<T>::cardinality() const
 template<typename T>
 void Set<T>::clear()
 {
-    //ADD CODE
+    Node *p = head->next;
+    
+    while(p != tail)
+    {
+        Node *curr = p;
+        erase(curr); // OR: delete curr. But in that case we have to bind head to tail in the end!!!
+        p = p->next;
+    }
 }
 
 //Return true, if the set is a subset of b, otherwise false
@@ -507,6 +542,7 @@ Set<T>& Set<T>::insert(Node *p, T val)
     Node *newP = new Node(val, p, p->prev);
     p->prev->next = newP;
     p->prev = newP;
+    counter++;
     return *this;
 }
 
@@ -515,10 +551,11 @@ Set<T>& Set<T>::insert(Node *p, T val)
 template<typename T>
 Set<T>& Set<T>::erase(Node *p)
 {
-    Node *newP = new Node(p->value, p, p->prev);
-    p->prev->next = p->next;
     p->next->prev = p->prev;
+    p->prev->next = p->next;
     delete p;
+    counter--;
+
     return *this;
 }
 
@@ -537,13 +574,13 @@ void Set<T>::init()
 template<typename T>
 void Set<T>::print(ostream& os) const
 {
-    // OR: ifhead->next == tail)   because the list is empty if(head is pointing to tail)
+    // OR: if(head->next == tail)   because the list is empty if(head is pointing to tail)
     if(counter == 0)
         cout<<"The Set is empty!"<<endl;
     else
     {
         cout<<"{";
-        for (Node *p = head; (p->next != NULL); p = p->next)
+        for (Node *p = head; (p != tail); p = p->next)
         {
             cout<<" "<<p->value;
         }
