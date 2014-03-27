@@ -370,7 +370,7 @@ Set<T>::Set ()
 template<typename T>
 Set<T>::Set (T n)
 {
-   //ADD CODE
+   
 }
 
 
@@ -411,8 +411,12 @@ Set<T>& Set<T>::operator=(const Set& b)
 template<typename T>
 bool Set<T>::is_empty () const
 {
-   //ADD CODE
-   return false;
+    if (counter == 0)
+    {
+        return true;
+    }
+    
+    return false;
 }
 
 
@@ -479,7 +483,7 @@ bool Set<T>::operator<(const Set& b) const
 template<typename T>
 Set<T>& Set<T>::insert(Node *p, T val)
 {
-    //ADD CODE
+
     return *this;
 }
 
@@ -496,7 +500,10 @@ Set<T>& Set<T>::erase(Node *p)
 template<typename T>
 void Set<T>::init()
 {
-    //ADD CODE
+    head = new Node(0, NULL, NULL);
+    tail = new Node(0, NULL, head);
+    head->next = tail;
+    counter = 0;
 }
 
 
@@ -504,7 +511,17 @@ void Set<T>::init()
 template<typename T>
 void Set<T>::print(ostream& os) const
 {
-    //ADD CODE
+    if(counter == 0)
+        cout<<"The Set is empty!"<<endl;
+    else
+    {
+        cout<<"{";
+        for (Node *p = head; (p->next != NULL); p = p->next)
+        {
+            cout<<" "<<p->value;
+        }
+        cout<<"}";
+    }
 }
 
 
