@@ -1,0 +1,68 @@
+** Re-hashing ...
+Hash table load factor = 1.20
+** Re-hashing completed ...
+Hash table load factor = 0.55
+** Insert
+
+Size = 11
+Number of items in the table = 6
+Load factor = 0.55
+** List[0]
+** List[1]
+                     Aida   Counter: 0
+** List[2]
+                    Lucas   Counter: 0
+** List[3]
+                  Kenneth   Counter: 0
+** List[4]
+** List[5]
+** List[6]
+** List[7]
+** List[8]
+                    Jonas   Counter: 0
+                    Britt   Counter: 0
+** List[9]
+** List[10]
+               Pierangelo   Counter: 0
+
+
+Aida is already in the table!
+** Find
+
+                    Jonas   Counter: 0
+
+
+** Remove
+
+Remove successfull!!
+
+Jonas not found.
+
+Size = 11
+Number of items in the table = 11
+Load factor = 1.00
+** List[0]
+                   Jesper   Counter: 0
+** List[1]
+                     Aida   Counter: 0
+** List[2]
+                    Lucas   Counter: 0
+** List[3]
+                     Sawn   Counter: 0
+                  Kenneth   Counter: 0
+** List[4]
+** List[5]
+                     Hans   Counter: 0
+                   Robert   Counter: 0
+                      Ian   Counter: 0
+** List[6]
+** List[7]
+** List[8]
+                    Britt   Counter: 0
+** List[9]
+** List[10]
+                   Rikard   Counter: 0
+               Pierangelo   Counter: 0
+
+
+** Hash Table Destructor

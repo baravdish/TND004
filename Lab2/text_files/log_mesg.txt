@@ -1,0 +1,5 @@
+*** LIST OF MISSPELLINGS
+=========================
+                   docent   Counter: 1
+               dieckmanns   Counter: 1
+                       dm   Counter: 2
