@@ -438,7 +438,7 @@ int Set<T>::cardinality() const
 }
 
 
-//Mak ethe set empty
+//Make the set empty
 template<typename T>
 void Set<T>::clear()
 {
