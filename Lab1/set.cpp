@@ -370,7 +370,9 @@ Set<T>::Set ()
 template<typename T>
 Set<T>::Set (T n)
 {
-   
+    Node *p = new Node(n, tail, head);
+    head->next = p;
+    tail->prev = p;
 }
 
 
@@ -378,7 +380,25 @@ Set<T>::Set (T n)
 template<typename T>
 Set<T>::Set (T a[], int n)
 {
-    //ADD CODE
+
+    Node *p = head;
+    for(int i = 0; i < n; i++)
+    {
+        insert(p->next, a[i]);
+        p = p->next;
+    }
+
+    // Code review: This might go faster or slower than O(n). Worth to check it out later.
+    // Ok maybe not faster than O(n), but still...
+    // int i = 0;
+    // Node *p = head;
+    // while (i<n)
+    // {
+    //     Node *pre = new Node(a[i], NULL);
+    //     p->next = pre;
+    //     p = p->next;
+    //     i++;
+    // }
 }
 
 
@@ -386,7 +406,7 @@ Set<T>::Set (T a[], int n)
 template<typename T>
 Set<T>::Set (const Set& b)
 {
-    //ADD CODE
+
 }
 
 
@@ -394,7 +414,9 @@ Set<T>::Set (const Set& b)
 template<typename T>
 Set<T>::~Set ()
 {
-    //ADD CODE
+    clear();
+    delete tail;
+    delete head;
 }
 
 
@@ -415,7 +437,6 @@ bool Set<T>::is_empty () const
     {
         return true;
     }
-    
     return false;
 }
 
@@ -438,7 +459,7 @@ int Set<T>::cardinality() const
 }
 
 
-//Make the set empty
+//Mak ethe set empty
 template<typename T>
 void Set<T>::clear()
 {
@@ -483,7 +504,9 @@ bool Set<T>::operator<(const Set& b) const
 template<typename T>
 Set<T>& Set<T>::insert(Node *p, T val)
 {
-
+    Node *newP = new Node(val, p, p->prev);
+    p->prev->next = newP;
+    p->prev = newP;
     return *this;
 }
 
@@ -492,7 +515,10 @@ Set<T>& Set<T>::insert(Node *p, T val)
 template<typename T>
 Set<T>& Set<T>::erase(Node *p)
 {
-    //ADD CODE
+    Node *newP = new Node(p->value, p, p->prev);
+    p->prev->next = p->next;
+    p->next->prev = p->prev;
+    delete p;
     return *this;
 }
 
@@ -511,6 +537,7 @@ void Set<T>::init()
 template<typename T>
 void Set<T>::print(ostream& os) const
 {
+    // OR: ifhead->next == tail)   because the list is empty if(head is pointing to tail)
     if(counter == 0)
         cout<<"The Set is empty!"<<endl;
     else
