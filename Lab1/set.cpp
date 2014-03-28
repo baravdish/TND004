@@ -370,15 +370,9 @@ Set<T>::Set ()
 template<typename T>
 Set<T>::Set (T n)
 {
-    init(); // insert the dummy nodes
+    init();
+    insert(head->next, n);
 
-    Node *p = new Node(n, tail, head);
-
-    //>>>>>>>>>>>>>> CRASH HERE: <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    // head->next = p; 
-    
-    tail->prev = p;
-    
     counter = 1;
 }
 
@@ -563,8 +557,9 @@ Set<T>& Set<T>::erase(Node *p)
 template<typename T>
 void Set<T>::init()
 {
-    head = new Node(0, NULL, NULL);
-    tail = new Node(0, NULL, head);
+
+    head = new Node();
+    tail = new Node(0, nullptr, head);
     head->next = tail;
     counter = 0;
 }
