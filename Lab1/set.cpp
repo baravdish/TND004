@@ -496,8 +496,8 @@ void Set<T>::clear()
     while(p != tail)
     {
         Node *curr = p;
-        erase(curr); // OR: delete curr. But in that case we have to bind head to tail in the end!!!
         p = p->next;
+        erase(curr); // OR: delete curr. But in that case we have to bind head to tail in the end!!!
     }
 }
 
