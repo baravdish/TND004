@@ -381,7 +381,7 @@ Set<T>::Set (T n)
 template<typename T>
 Set<T>::Set (T a[], int n)
 {
-
+    init();
     Node *p = head;
     for(int i = 0; i < n; i++)
     {
@@ -408,7 +408,13 @@ Set<T>::Set (T a[], int n)
 template<typename T>
 Set<T>::Set (const Set& b)
 {
-
+    init();
+    Node *p = b.head->next;
+    while(p != b.tail)
+    {
+        insert(tail, p->value);
+        p = p->next;
+    }
 }
 
 
@@ -426,7 +432,16 @@ Set<T>::~Set ()
 template<typename T>
 Set<T>& Set<T>::operator=(const Set& b)
 {
-    //ADD CODE
+    clear(); //Clear current set
+
+    //A copy off the copy-operator without the 'init()'
+    Node *p = b.head->next;
+    while(p != b.tail)
+    {
+        insert(tail, p->value);
+        p = p->next;
+    }
+
     return *this;
 }
 
@@ -467,7 +482,6 @@ bool Set<T>::is_member (T val) const
 template<typename T>
 int Set<T>::cardinality() const
 {
-
     return counter;
 
     // OR: 
@@ -481,7 +495,7 @@ int Set<T>::cardinality() const
 }
 
 
-//Mak ethe set empty
+//Make the set empty
 template<typename T>
 void Set<T>::clear()
 {
@@ -574,9 +588,9 @@ void Set<T>::print(ostream& os) const
     else
     {
         cout<<"{";
-        for (Node *p = head; (p != tail); p = p->next)
+        for (Node *p = head->next; (p != tail); p = p->next)
         {
-            cout<<" "<<p->value;
+            cout<<" "<<p->value << " ";
         }
         cout<<"}";
     }
@@ -584,12 +598,33 @@ void Set<T>::print(ostream& os) const
 
 
 //Set union
-//Return a new set with the elements in S1 or in S2 (without repeated elements)
+//Return a new set with the elements in S1 or in S2 
+//(without repeated elements)
 template<typename T>
 Set<T> Set<T>::_union(const Set& b) const
 {
-    //ADD CODE
-    return *this;
+    //unionSet is now a copy of Set b
+    Set<T> unionSet = Set<T>(b);
+    Node *p = head->next;
+    Node *union_p = unionSet.head->next;
+
+    while(p != tail || union_p != unionSet.tail)
+    {
+        if(p->value == union_p->value){}
+        else if(p->value < union_p->value)
+        {
+            unionSet.insert(union_p, p->value);
+        }
+        else
+        {
+            unionSet.insert(union_p->next, p->value);
+        }
+
+        p = p->next;
+        union_p = union_p->next;
+    }
+
+    return unionSet;
 }
 
 

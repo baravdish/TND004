@@ -26,82 +26,80 @@ int main()
     cout << "S3 = " << S3 << endl;
     cout << "S4 = " << S4 << endl;
 
-    cin >> test_dummy_shit;
-
     // /*****************************************************
     // * TEST PHASE 1                                       *
     // * Constructor: create a Set from an array            *
     // ******************************************************/
-    // cout << "\nTEST PHASE 1: constructor from an array\n\n";
+    cout << "\nTEST PHASE 1: constructor from an array\n\n";
 
-    // int A1[] = { 1, 3, 5 };
-    // int A2[] = { 2, 3, 4 };
+    int A1[] = { 1, 3, 5 };
+    int A2[] = { 2, 3, 4 };
 
-    // Set<int> S1(A1, 3);
-    // Set<int> S2(A2, 3);
+    Set<int> S1(A1, 3);
+    Set<int> S2(A2, 3);
 
-    // cout << "S1 = " << S1 << endl;
-    // cout << "S2 = " << S2 << endl;
+    cout << "S1 = " << S1 << endl;
+    cout << "S2 = " << S2 << endl; 
 
     // /*****************************************************
     // * TEST PHASE 2                                       *
     // * Copy constructor                                   *
     // ******************************************************/
-    // cout << "\nTEST PHASE 2: copy constructor\n\n";
+    cout << "\nTEST PHASE 2: copy constructor\n\n";
 
-    // Set<int> S5(S1);
+    Set<int> S5(S1);
 
-    // cout << "S5 = " << S5 << endl;
+    cout << "S5 = " << S5 << endl;
 
     // /*****************************************************
     // * TEST PHASE 3                                       *
     // * Assignment operator: operator=                     *
     // ******************************************************/
-    // cout << "\nTEST PHASE 3: operator=\n\n";
+    cout << "\nTEST PHASE 3: operator=\n\n";
 
-    // S3 = S4 = S5;
+    S3 = S4 = S5;
 
-    // cout << "S3 = " << S3 << endl;
-    // cout << "S4 = " << S4 << endl;
-
+    cout << "S3 = " << S3 << endl;
+    cout << "S4 = " << S4 << endl;
 
     // /*****************************************************
     // * TEST PHASE 4                                       *
     // * is_member                                          *
     // ******************************************************/
-    // cout << "\nTEST PHASE 4: is_member\n\n";
+    cout << "\nTEST PHASE 4: is_member\n\n";
 
-    // for (int i = 1; i <= 5; i++)
-    // {
-    //     cout << "S3.is_member(" << i << ") ? "
-    //          << (S3.is_member(i) ? 'T' : 'F') << endl;
-    // }
-    //   cout << "\nS3.is_member(99999) ? "
-    //        << (S3.is_member(99999) ? 'T' : 'F') << endl;
+    for (int i = 1; i <= 5; i++)
+    {
+        cout << "S3.is_member(" << i << ") ? "
+            << (S3.is_member(i) ? 'T' : 'F') << endl;
+    }
+    cout << "\nS3.is_member(99999) ? "
+        << (S3.is_member(99999) ? 'T' : 'F') << endl;
 
     // /*****************************************************
     // * TEST PHASE 5                                       *
     // * cardinality                                        *
     // ******************************************************/
-    // cout << "\nTEST PHASE 5: cardinality\n\n";
+    cout << "\nTEST PHASE 5: cardinality\n\n";
 
-    // cout << "S3.cardinality() = "
-    //      << S3.cardinality() << endl;
+    cout << "S3.cardinality() = " << S3.cardinality() << endl;
 
     // ****************************************************
     // * TEST PHASE 5                                       *
     // * Overloaded operators: union, intersection, and     *
     // * and difference                                     *
     // *****************************************************
-    // cout << "\nTEST PHASE 5: union, intersection, and difference\n\n";
+    cout << "\nTEST PHASE 5: union, intersection, and difference\n\n";
 
-    // S3 = S1 + S2 + 4;
-    // S4 = S1 * S2;
-    // S5 = S1 - S2;
+    S3 = S1 + S2 + 4;
+    S4 = S1 * S2;
+    S5 = S1 - S2;
 
-    // cout << "S3 = " << S3 << endl;
-    // cout << "S4 = " << S4 << endl;
-    // cout << "S5 = " << S5 << endl;
+    cout << "S3 = " << S3 << endl;
+    cout << "S4 = " << S4 << endl;
+    cout << "S5 = " << S5 << endl;
+
+    cin >> test_dummy_shit;
 
     // /*****************************************************
     // * TEST PHASE 6                                       *
