@@ -560,7 +560,10 @@ bool Set<T>::operator==(const Set& b) const
 template<typename T>
 bool Set<T>::operator<(const Set& b) const
 {
-    
+    if(b.cardinality() > this->cardinality() && *this <= b)
+    {
+        return true;
+    }
     return false;
 }
 
@@ -598,7 +601,7 @@ template<typename T>
 void Set<T>::init()
 {
     head = new Node();
-    tail = new Node(0, nullptr, head);
+    tail = new Node(T(), nullptr, head);
     head->next = tail;
     counter = 0;
 }

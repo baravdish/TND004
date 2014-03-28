@@ -111,20 +111,19 @@ int main()
     cout << "S2 <= S3 ? " << (S2 <= S3 ? 'T' : 'F') << endl;
     cout << "S2 <  S3 ? " << (S2 <  S3 ? 'T' : 'F') << endl;
     
-    cin >> test_dummy_shit;
 
     // /*****************************************************
     // * TEST PHASE 7                                       *
     // * Overloaded operators: insert and delete one element*
     // ******************************************************/
-    // cout << "\nTEST PHASE 7: insertion and deletion\n\n";
+    cout << "\nTEST PHASE 7: insertion and deletion\n\n";
 
-    // //Note: conversion constructor is called
-    // S4 = S1 + 4 - 5 - 99999;
-    // S5 = S2 - 2 + 1 - 99999;
+    //Note: conversion constructor is called
+    S4 = S1 + 4 - 5 - 99999;
+    S5 = S2 - 2 + 1 - 99999;
 
-    // cout << "S4 = " << S4 << endl;
-    // cout << "S5 = " << S5 << endl;
+    cout << "S4 = " << S4 << endl;
+    cout << "S5 = " << S5 << endl;
 
     // /*****************************************************
     // * TEST PHASE 8                                       *
@@ -133,31 +132,31 @@ int main()
     // ******************************************************/
     // cout << "\nTEST PHASE 8: equality, subset, strict subset\n\n";
 
-    // cout << "S4 == S5 ? " << (S4 == S5 ? 'T' : 'F') << endl;
-    // cout << "S4 <= S5 ? " << (S4 <= S5 ? 'T' : 'F') << endl;
-    // cout << "S4 <  S5 ? " << (S4 <  S5 ? 'T' : 'F') << endl;
+    cout << "S4 == S5 ? " << (S4 == S5 ? 'T' : 'F') << endl;
+    cout << "S4 <= S5 ? " << (S4 <= S5 ? 'T' : 'F') << endl;
+    cout << "S4 <  S5 ? " << (S4 <  S5 ? 'T' : 'F') << endl;
 
     // /*****************************************************
     // * TEST PHASE 9                                       *
     // * Create a set of strings                            *
     // ******************************************************/
-    // cout << "\nTEST PHASE 9: Create a set of strings\n\n";
+    cout << "\nTEST PHASE 9: Create a set of strings\n\n";
 
-    // Set<string> words;
+    Set<string> words;
 
-    // string w;
+    string w;
 
-    // cout << "Enter some text (end with stop)" << endl;
+    cout << "Enter some text (end with stop)" << endl;
 
-    // while(cin >> w && w != "stop")
-    // {
-    //     //transform all upper-case letters to lower-case letters
-    //     transform(w.begin(), w.end(), w.begin(), ::tolower);
-    //     words = words + w;
-    // }
+    while(cin >> w && w != "stop")
+    {
+        //transform all upper-case letters to lower-case letters
+        transform(w.begin(), w.end(), w.begin(), ::tolower);
+        words = words + w;
+    }
 
-    // cout << "The words sorted alphabetically: "
-    //      << words << endl;
+    cout << "The words sorted alphabetically: "
+         << words << endl;
 
 
     return 0;
