@@ -8,6 +8,8 @@
 
 using namespace std;
 
+int test_dummy_shit;
+
 //Do not modify
 int main()
 {
@@ -22,7 +24,9 @@ int main()
     Set<int> S4(-4);
 
     cout << "S3 = " << S3 << endl;
-    // cout << "S4 = " << S4 << endl;
+    cout << "S4 = " << S4 << endl;
+
+    cin >> test_dummy_shit;
 
     // /*****************************************************
     // * TEST PHASE 1                                       *

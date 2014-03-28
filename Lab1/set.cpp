@@ -557,7 +557,6 @@ Set<T>& Set<T>::erase(Node *p)
 template<typename T>
 void Set<T>::init()
 {
-
     head = new Node();
     tail = new Node(0, nullptr, head);
     head->next = tail;
