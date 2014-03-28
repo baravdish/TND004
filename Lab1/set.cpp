@@ -387,7 +387,6 @@ Set<T>::Set (T a[], int n)
     {
         insert(p->next, a[i]);
         p = p->next;
-        counter++;
     }
 
     // Code review: This might go faster or slower than O(n). Worth to check it out later.
@@ -481,17 +480,15 @@ bool Set<T>::is_member (T val) const
 //Return number of elements in the set
 template<typename T>
 int Set<T>::cardinality() const
-{
-    return counter;
-
-    // OR: 
-    // int i = 0
-    // Node *p = head->next;
-    // while(p != tail)
-    // {
-    //      i++;
-    // }
-    // reutrn i;
+{ 
+    int i = 0;
+    Node *p = head->next;
+    while(p != tail)
+    {
+        i++;
+        p = p->next;
+    }
+    return i;
 }
 
 
@@ -507,6 +504,8 @@ void Set<T>::clear()
         p = p->next;
         erase(curr); // OR: delete curr. But in that case we have to bind head to tail in the end!!!
     }
+
+    counter = 0;
 }
 
 //Return true, if the set is a subset of b, otherwise false
@@ -514,7 +513,12 @@ void Set<T>::clear()
 template<typename T>
 bool Set<T>::operator<=(const Set& b) const
 {
-    //ADD CODE
+    Set<T> interSet = this->_intersection(b);
+    if(interSet == *this)
+    {
+        return true;
+    }
+
     return false;
 }
 
@@ -524,8 +528,30 @@ bool Set<T>::operator<=(const Set& b) const
 template<typename T>
 bool Set<T>::operator==(const Set& b) const
 {
-    //ADD CODE
-    return false;
+    if(this->cardinality() != b.cardinality())
+    {
+        return false;
+    }
+
+    Set<T> interSet = this->_intersection(b);
+
+    Node *p = head->next;
+    Node *inter_p = interSet.head->next;
+
+    while(p != tail || inter_p != interSet.tail)
+    {
+        if(p->value == inter_p->value)
+        {
+            p = p->next;
+            inter_p = inter_p->next;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 
@@ -534,7 +560,7 @@ bool Set<T>::operator==(const Set& b) const
 template<typename T>
 bool Set<T>::operator<(const Set& b) const
 {
-    //ADD CODE
+    
     return false;
 }
 

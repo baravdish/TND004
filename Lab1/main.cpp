@@ -108,9 +108,10 @@ int main()
     cout << "\nTEST PHASE 6: equality, subset, strict subset\n\n";
 
     cout << "S2 == S3 ? " << (S2 == S3 ? 'T' : 'F') << endl;
-    // cout << "S2 <= S3 ? " << (S2 <= S3 ? 'T' : 'F') << endl;
-    // cout << "S2 <  S3 ? " << (S2 <  S3 ? 'T' : 'F') << endl;
-    // cin >> test_dummy_shit;
+    cout << "S2 <= S3 ? " << (S2 <= S3 ? 'T' : 'F') << endl;
+    cout << "S2 <  S3 ? " << (S2 <  S3 ? 'T' : 'F') << endl;
+    
+    cin >> test_dummy_shit;
 
     // /*****************************************************
     // * TEST PHASE 7                                       *
