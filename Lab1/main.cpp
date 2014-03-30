@@ -130,7 +130,7 @@ int main()
     // * Overloaded operators: equality, subset, and        *
     // * strict subset                                      *
     // ******************************************************/
-    // cout << "\nTEST PHASE 8: equality, subset, strict subset\n\n";
+    cout << "\nTEST PHASE 8: equality, subset, strict subset\n\n";
 
     cout << "S4 == S5 ? " << (S4 == S5 ? 'T' : 'F') << endl;
     cout << "S4 <= S5 ? " << (S4 <= S5 ? 'T' : 'F') << endl;
@@ -157,6 +157,8 @@ int main()
 
     cout << "The words sorted alphabetically: "
          << words << endl;
+
+    cin >> test_dummy_shit;
 
 
     return 0;
