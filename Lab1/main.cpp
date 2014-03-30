@@ -8,8 +8,6 @@
 
 using namespace std;
 
-int test_dummy_shit;
-
 //Do not modify
 int main()
 {
@@ -157,8 +155,6 @@ int main()
 
     cout << "The words sorted alphabetically: "
          << words << endl;
-
-    cin >> test_dummy_shit;
 
 
     return 0;
