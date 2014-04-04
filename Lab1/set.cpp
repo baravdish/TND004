@@ -461,7 +461,7 @@ bool Set<T>::is_empty () const
 template<typename T>
 bool Set<T>::is_member (T val) const
 {
-    
+
     Node *p = head->next;
     while(p != tail)
     {
@@ -480,7 +480,8 @@ bool Set<T>::is_member (T val) const
 //Return number of elements in the set
 template<typename T>
 int Set<T>::cardinality() const
-{ 
+{
+    /*
     int i = 0;
     Node *p = head->next;
     while(p != tail)
@@ -488,7 +489,8 @@ int Set<T>::cardinality() const
         i++;
         p = p->next;
     }
-    return i;
+    return i;*/
+    return counter;
 }
 
 
@@ -497,7 +499,7 @@ template<typename T>
 void Set<T>::clear()
 {
     Node *p = head->next;
-    
+
     while(p != tail)
     {
         Node *curr = p;
@@ -627,7 +629,7 @@ void Set<T>::print(ostream& os) const
 
 
 //Set union
-//Return a new set with the elements in S1 or in S2 
+//Return a new set with the elements in S1 or in S2
 //(without repeated elements)
 template<typename T>
 Set<T> Set<T>::_union(const Set& b) const
@@ -674,24 +676,21 @@ Set<T> Set<T>::_intersection(const Set& b) const
     Node *p = head->next;
     Node *bp = b.head->next;
     Node *inter_p = interSet.head->next;
-    
+
     while((bp != b.tail) && (p != tail))
     {
         if(p->value == bp->value)
         {
-            // cout<<p->value<<" == "<<bp->value<<endl;
             interSet.insert(inter_p, p->value);
             p = p->next;
             bp = bp->next;
         }
         else if(p->value < bp->value)
         {
-            // cout<<p->value<<" < "<<bp->value<<endl;
             p = p->next;
         }
         else
         {
-            // cout<<p->value<<" > "<<bp->value<<endl;
             bp = bp->next;
         }
     }
@@ -705,29 +704,35 @@ Set<T> Set<T>::_intersection(const Set& b) const
 template<typename T>
 Set<T> Set<T>::_difference(const Set& b) const
 {
-    Set<T> interSet = this->_intersection(b);
-    Set<T> diffSet(*this);
-
+    Set<T> diffSet;
+    Node *p = head->next;
+    Node *bp = b.head->next;
     Node *diff_p = diffSet.head->next;
-    Node *inter_p = interSet.head->next;
-    
-    while((diff_p != diffSet.tail) && (inter_p != interSet.tail))
+
+    while((bp != b.tail) && (p != tail))
     {
-        if(diff_p->value == inter_p->value)
+        if(p->value == bp->value)
         {
-            interSet.erase(diff_p);
-            diff_p = diff_p->next;
-            inter_p = inter_p->next;
+            p = p->next;
+            bp = bp->next;
         }
-        else if(diff_p->value < inter_p->value)
+        else if(p->value < bp->value)
         {
-            diff_p = diff_p->next;
+            diffSet.insert(diff_p, p->value);
+            p = p->next;
         }
         else
         {
-            inter_p = inter_p->next;
+            bp = bp->next;
         }
     }
+
+    while(p != tail)
+    {
+        diffSet.insert(diff_p, p->value);
+        p = p->next;
+    }
+
     return diffSet;
 }
 
