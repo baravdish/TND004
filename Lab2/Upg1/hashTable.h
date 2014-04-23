@@ -118,7 +118,7 @@ class HashTable
 
        //number of itms stored in the table
        int nItems;  /**< Number of items stored in the table */
-
+       double primeTableSize;
        //hash function
        const HASH h; /**< Hash function */
 

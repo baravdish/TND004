@@ -51,9 +51,12 @@ int nextPrime( int n )
 HashTable::HashTable(int tableSize, HASH f, int ml)
  : h(f), MAX_LOAD(ml)
 {
-	
-	//HashTable hashArray = new HashTable[nextPrime(tableSize)];
-   //ADD CODE
+  // h är pekare till hash-funktionen som tar in en string och en int, precis som typedef void (*fun_ptr)(int) och fun_ptr funny_array[10] = {10}
+  primeTableSize = nextPrime(tableSize);
+  theLists.resize(primeTableSize);
+  nItems = 0;
+
+  // KANSKE KÖTTA IN HELA DIC:EN I HASHTABELLEN?
 }
 
 
@@ -62,7 +65,13 @@ HashTable::HashTable(int tableSize, HASH f, int ml)
 //TO IMPLEMENT
 void HashTable::makeEmpty()
 {
-    //ADD CODE
+    for(unsigned int i = 0; i < primeTableSize; i++)
+    {
+        if(!theLists.at(i).empty())
+        {
+            theLists.at(i).clear();
+        }
+    }
 }
 
 
@@ -81,8 +90,7 @@ HashTable::~HashTable()
 //TO IMPLEMENT
 double HashTable::loadFactor() const
 {
-    
-    return 0;
+    return (double)(nItems/primeTableSize);
 }
 
 
@@ -121,6 +129,7 @@ Item* HashTable::find(string w) const
 Item* HashTable::insert(string w, short i)
 {
     //ADD CODE
+   nItems++;
    return nullptr;
 }
 
