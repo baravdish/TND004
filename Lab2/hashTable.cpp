@@ -51,6 +51,8 @@ int nextPrime( int n )
 HashTable::HashTable(int tableSize, HASH f, int ml)
  : h(f), MAX_LOAD(ml)
 {
+	
+	//HashTable hashArray = new HashTable[nextPrime(tableSize)];
    //ADD CODE
 }
 
@@ -79,7 +81,7 @@ HashTable::~HashTable()
 //TO IMPLEMENT
 double HashTable::loadFactor() const
 {
-    //ADD CODE
+    
     return 0;
 }
 
@@ -105,7 +107,7 @@ void HashTable::reHash()
 //Return a pointer to the item that matches word w
 //If w does not belong to the table then return nullptr
 //TO IMPLEMENT
-Item* HashTable::find(string x) const
+Item* HashTable::find(string w) const
 {
    //ADD CODE
    return nullptr;

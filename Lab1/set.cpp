@@ -432,7 +432,7 @@ template<typename T>
 Set<T>& Set<T>::operator=(const Set& b)
 {
     clear(); //Clear current set
-
+       
     //A copy off the copy-operator without the 'init()'
     Node *p = b.head->next;
     while(p != b.tail)
