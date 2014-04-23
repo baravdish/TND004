@@ -8,8 +8,6 @@
 
 using namespace std;
 
-int test_dummy_shit;
-
 //Do not modify
 int main()
 {
@@ -130,7 +128,7 @@ int main()
     // * Overloaded operators: equality, subset, and        *
     // * strict subset                                      *
     // ******************************************************/
-    // cout << "\nTEST PHASE 8: equality, subset, strict subset\n\n";
+    cout << "\nTEST PHASE 8: equality, subset, strict subset\n\n";
 
     cout << "S4 == S5 ? " << (S4 == S5 ? 'T' : 'F') << endl;
     cout << "S4 <= S5 ? " << (S4 <= S5 ? 'T' : 'F') << endl;
