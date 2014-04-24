@@ -1,5 +1,4 @@
 #include "hashTable.h"
-
 #include <iomanip>
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
@@ -51,12 +50,15 @@ int nextPrime( int n )
 HashTable::HashTable(int tableSize, HASH f, int ml)
  : h(f), MAX_LOAD(ml)
 {
-  // h Ã¤r pekare till hash-funktionen som tar in en string och en int, precis som typedef void (*fun_ptr)(int) och fun_ptr funny_array[10] = {10}
+  // h är pekare till hash-funktionen som tar in en string och en int, precis som typedef void (*fun_ptr)(int) och fun_ptr funny_array[10] = {10}
   primeTableSize = nextPrime(tableSize);
+
+
+
   theLists.resize(primeTableSize);
   nItems = 0;
 
-  // KANSKE KÃ–TTA IN HELA DIC:EN I HASHTABELLEN?
+  // KANSKE KÖTTA IN HELA DIC:EN I HASHTABELLEN?
 }
 
 
@@ -90,7 +92,7 @@ HashTable::~HashTable()
 //TO IMPLEMENT
 double HashTable::loadFactor() const
 {
-    return (double)(nItems/primeTableSize);
+    return (double)(nItems/(double)primeTableSize);
 }
 
 
@@ -104,6 +106,13 @@ void HashTable::reHash()
         << loadFactor() << endl;
 
     //ADD CODE
+/*   int newTablesize = nextPrime(2*tableSize);
+   for(0 till tableSize)
+   {
+      index = hashfunktion(theLists(i), newTableSize)
+   }
+*/
+
 
      cout << "** Re-hashing completed ..." << endl;
      cout << "Hash table load factor = "
@@ -111,13 +120,44 @@ void HashTable::reHash()
           << loadFactor() << endl;
  }
 
-
 //Return a pointer to the item that matches word w
 //If w does not belong to the table then return nullptr
 //TO IMPLEMENT
 Item* HashTable::find(string w) const
 {
-   //ADD CODE
+   int i = h(w, primeTableSize);
+   list<Item*>::const_iterator it = theLists[i].begin();
+
+   if(!theLists[i].empty())
+   {
+      //itemPtr = &(*it);
+
+      for(; it != theLists[i].end(); ++it)
+      {
+		 if((*it)->word == w )
+         {
+			 return *it;
+         }
+      }
+   }
+
+
+   //for_each(theLists[i].begin(), theLists[i].end(), compare(theLists[i]));
+
+
+   /*
+   Item *itemPtr;
+   int i = h(w, primeTableSize);
+   list<Item*> test;
+   test = theLists[i];
+   list<Item*>::iterator it = test.begin();
+   itemPtr = *it;
+
+   if(itemPtr->word == w)
+   {
+      return itemPtr;
+   }
+   return nullptr;*/
    return nullptr;
 }
 
@@ -128,9 +168,17 @@ Item* HashTable::find(string w) const
 //TO IMPLEMENT
 Item* HashTable::insert(string w, short i)
 {
-    //ADD CODE
+   // ASSUME W IS NOT IN THA TABBLE!!!
+   // behöver ej hantera kollision då!
+
+   int index = h(w, primeTableSize);
+
    nItems++;
-   return nullptr;
+   Item *itemPtr = new Item(w,i);
+   theLists[index].push_back(itemPtr);
+   return itemPtr;
+   //theLists[index].push_back(itemPtr);
+
 }
 
 
@@ -140,8 +188,9 @@ Item* HashTable::insert(string w, short i)
 //TO IMPLEMENT
 bool HashTable::remove(string w)
 {
-    //ADD CODE
-    return false;
+   // OM ORDET HITTAS, DÅ SKA nItems--, ANNARS INTE
+   nItems--;
+   return false;
 }
 
 
