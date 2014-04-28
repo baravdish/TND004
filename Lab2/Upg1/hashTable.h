@@ -27,6 +27,7 @@ class HashTable
     typedef unsigned (*HASH)(string, int); //new type HASH: pointer to an hash function
 
 
+
    /** \brief Constructor.
     *
     * \param TableSize number of slots in the table.
@@ -118,7 +119,7 @@ class HashTable
 
        //number of itms stored in the table
        int nItems;  /**< Number of items stored in the table */
-       
+
        //hash function
        const HASH h; /**< Hash function */
 

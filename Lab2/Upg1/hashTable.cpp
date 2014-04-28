@@ -136,7 +136,7 @@ void HashTable::reHash()
 					// KANSKE MEMORY LEAK!!!!!!!!!!!!!!
 					int index = h((*it)->word, theLists.size());
 					Item *itemPtr = new Item((*it)->word,0);
-					theLists[index].push_back(itemPtr);
+					theLists[index].push_front(itemPtr);
 				}
 			}
 		}
@@ -183,11 +183,10 @@ Item* HashTable::insert(string w, short i)
    nItems++;
 
    Item *itemPtr = new Item(w,i);
-   theLists[index].push_back(itemPtr);
-   //cout<<"Hey! Vilken underbar dag de'ä!"<<endl;
+   theLists[index].push_front(itemPtr);
    if(loadFactor() > MAX_LOAD)
    {
-		reHash();
+        reHash();
    }
    return itemPtr;
 }
@@ -199,21 +198,19 @@ Item* HashTable::insert(string w, short i)
 //TO IMPLEMENT
 bool HashTable::remove(string w)
 {
-
    int index = h(w, theLists.size());
-   Item *itemPtr;
-   itemPtr = find(w);
+
+   Item *itemPtr = find(w);
 
    if(itemPtr == nullptr)
 		return false;
 
-	theLists[index].remove(itemPtr);
-	delete itemPtr;
+   theLists[index].remove(itemPtr);
+   delete itemPtr;
    nItems--;
 
    return true;
 }
-
 
 //Overloaded operator<<: outputs all items to stream os
 //TO IMPLEMENT

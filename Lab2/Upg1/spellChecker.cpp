@@ -65,8 +65,10 @@ SpellChecker::SpellChecker(string fileName, int n)
 //TO IMPLEMENT
 SpellChecker::~SpellChecker()
 {
-   //ADD CODE
-
+    // Ett spellchecker objekt består av en hashtable och en misspellingList
+   clean();
+   dictionary->~HashTable();
+   nWords = 0;
    cout << "** Spell Checker Destructor" << endl;
 }
 
@@ -86,7 +88,16 @@ bool SpellChecker::testSpelling(string w)
 
     if (w == "") return true; //case of a word consisting only of punctuation signs
 
-    //ADD CODE
+    Item *itemPtr = dictionary->find(w);
+
+    if(itemPtr->word == w)
+    {
+        return true;
+    }
+
+    //itemPtr->counter = 1;
+    //misspellings.pop_back(itemPtr);
+
     return false;
 }
 
@@ -96,7 +107,20 @@ bool SpellChecker::testSpelling(string w)
 //TO IMPLEMENT
 void SpellChecker::addWord(string w)
 {
-    //ADD CODE
+    if(testSpelling(w)) // true => ordet finns i listan, false => ordet finns inte
+    {
+        Item *itemPtr = dictionary->find(w);
+        if(itemPtr->counter > 0) // true => ordet är felstavat, false => ordet är rättstavat
+        {
+            itemPtr->counter++;
+        }
+    }
+    else    // ordet finns inte i listan
+    {
+        dictionary->insert(w, 1);
+        Item *itemPtr = dictionary->find(w);
+        misspellings.push_front(itemPtr);
+    }
 }
 
 
@@ -105,7 +129,17 @@ void SpellChecker::addWord(string w)
 //TO IMPLEMENT
 void SpellChecker::clean()
 {
-    //ADD CODE
+    list<Item*>::const_iterator it = misspellings.begin();
+    list<Item*>::const_iterator itPrev = misspellings.begin();
+
+    // misspellings pekar på alla ord som är tillagda
+    while(it != misspellings.end())
+    {
+        ++it;
+        delete *itPrev;
+        itPrev = it;
+    }
+    misspellings.clear();
 }
 
 
@@ -119,6 +153,5 @@ void SpellChecker::createLog(ostream& os)
 
     //ADD CODE
 }
-
 
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */
