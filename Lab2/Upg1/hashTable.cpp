@@ -1,9 +1,7 @@
 #include "hashTable.h"
-
 #include <iomanip>
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
-
 
 /** \brief Test whether a number is a prime.
 *
@@ -51,7 +49,20 @@ int nextPrime( int n )
 HashTable::HashTable(int tableSize, HASH f, int ml)
  : h(f), MAX_LOAD(ml)
 {
-   //ADD CODE
+  // h är pekare till hash-funktionen som tar in en string och en int, precis som typedef void (*fun_ptr)(int) och fun_ptr funny_array[10] = {10}
+  // alltså: h(string w, short i) är "h pekar på samma adress som en funktion som tar in en string och en int och returnar en int"
+  if(!isPrime(tableSize))
+  {
+    theLists.resize(nextPrime(tableSize));
+  }
+  else
+  {
+    theLists.resize(tableSize);
+  	//reHash();
+  }
+
+  nItems = 0;
+
 }
 
 
@@ -60,7 +71,22 @@ HashTable::HashTable(int tableSize, HASH f, int ml)
 //TO IMPLEMENT
 void HashTable::makeEmpty()
 {
-    //ADD CODE
+    for(unsigned int i = 0; i < theLists.size(); i++)
+    {
+        if(!theLists[i].empty())
+        {
+			list<Item*>::const_iterator it = theLists[i].begin();
+			list<Item*>::const_iterator itPrev = theLists[i].begin();
+
+			while(it != theLists[i].end())
+			{
+				++it;
+				delete *itPrev;
+				itPrev = it;
+			}
+			theLists[i].clear();
+        }
+    }
 }
 
 
@@ -79,8 +105,7 @@ HashTable::~HashTable()
 //TO IMPLEMENT
 double HashTable::loadFactor() const
 {
-    //ADD CODE
-    return 0;
+    return (double)( (double)nItems / (double)theLists.size() );
 }
 
 
@@ -93,21 +118,57 @@ void HashTable::reHash()
         << fixed << setprecision(2)
         << loadFactor() << endl;
 
-    //ADD CODE
+	int newPrimeSize = nextPrime(2*theLists.size());
 
+	if(!theLists.empty())
+	{
+		vector<list<Item*>> temp = theLists;
+
+		theLists.clear();
+		theLists.resize(newPrimeSize);
+
+		for(int i = 0; i < temp.size(); i++)
+		{
+			if(!temp[i].empty())
+			{
+				for(list<Item*>::const_iterator it = temp[i].begin(); it != temp[i].end(); ++it)
+				{
+					// KANSKE MEMORY LEAK!!!!!!!!!!!!!!
+					int index = h((*it)->word, theLists.size());
+					Item *itemPtr = new Item((*it)->word,0);
+					theLists[index].push_front(itemPtr);
+				}
+			}
+		}
+	}
+	else
+	{
+		theLists.resize(newPrimeSize);
+	}
      cout << "** Re-hashing completed ..." << endl;
      cout << "Hash table load factor = "
           << fixed << setprecision(2)
           << loadFactor() << endl;
  }
 
-
 //Return a pointer to the item that matches word w
 //If w does not belong to the table then return nullptr
 //TO IMPLEMENT
-Item* HashTable::find(string x) const
+Item* HashTable::find(string w) const
 {
-   //ADD CODE
+   int i = h(w, theLists.size());
+   list<Item*>::const_iterator it = theLists[i].begin();
+
+   if(!theLists[i].empty())
+   {
+      for(; it != theLists[i].end(); ++it)
+      {
+		 if((*it)->word == w )
+         {
+			 return *it;
+         }
+      }
+   }
    return nullptr;
 }
 
@@ -118,8 +179,16 @@ Item* HashTable::find(string x) const
 //TO IMPLEMENT
 Item* HashTable::insert(string w, short i)
 {
-    //ADD CODE
-   return nullptr;
+   int index = h(w, theLists.size());
+   nItems++;
+
+   Item *itemPtr = new Item(w,i);
+   theLists[index].push_front(itemPtr);
+   if(loadFactor() > MAX_LOAD)
+   {
+        reHash();
+   }
+   return itemPtr;
 }
 
 
@@ -129,19 +198,70 @@ Item* HashTable::insert(string w, short i)
 //TO IMPLEMENT
 bool HashTable::remove(string w)
 {
-    //ADD CODE
-    return false;
-}
+   int index = h(w, theLists.size());
 
+   Item *itemPtr = find(w);
+
+   if(itemPtr == nullptr)
+		return false;
+
+   theLists[index].remove(itemPtr);
+   delete itemPtr;
+   nItems--;
+
+   return true;
+}
 
 //Overloaded operator<<: outputs all items to stream os
 //TO IMPLEMENT
 ostream& operator <<(ostream& os, const HashTable& T)
 {
-   //ADD CODE
+	// antingen med iterator eller med int i för att loopa genom vektorn
+	list<Item*>::const_iterator it;
+	cout<<"Size = " <<T.theLists.size() << endl;
+	cout<<"Number of items in the table = " <<T.nItems << endl;
+	cout<<"Load factor = "<< T.loadFactor() << endl;
+	for(int i = 0; i < T.theLists.size(); i++)
+	{
+		cout<<"** List["<<i<<"]"<<endl;
+		if(!T.theLists[i].empty())
+		{
+			for(it = T.theLists[i].begin(); it != T.theLists[i].end(); ++it)
+			{
+				os<<**it; // för att
+				//i item.cpp är det:  operator<<(ostream& os, const Item& i) och *it pekar mot en lista medan **it pekar mot en lista som i sin tur har en pekare som pekar mot ett item
+			}
+		}
+	}
     return os;
 }
 
 
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

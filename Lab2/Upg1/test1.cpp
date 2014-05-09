@@ -106,8 +106,5 @@ int main()
             cout << "Not found: " << word << endl;
     }
 
-    int test_dummy_shit;
-    cin>>test_dummy_shit;
-
     return 0;
 }

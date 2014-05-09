@@ -6,7 +6,7 @@
 #include <iostream>
 #include <list>
 #include <vector>
-
+#include <string>
 using namespace std;
 
 
@@ -25,6 +25,7 @@ class HashTable
     *
     */
     typedef unsigned (*HASH)(string, int); //new type HASH: pointer to an hash function
+
 
 
    /** \brief Constructor.
