@@ -20,7 +20,8 @@ using namespace std;
 BST_threaded::BST_threaded()
  : counter(0)
 {
-    //ADD CODE
+    ELEMENT v;
+    root = new Node(v, nullptr, nullptr);
 }
 
 
@@ -55,9 +56,8 @@ void BST_threaded::insert(ELEMENT v)
     {
         //Insert first node of the BST has a left child of the BST
         root->left = new Node(v, root, root);
-        root->left->l_thread = root->left->r_thread = true;
+        root->left->l_thread = root->left->r_thread = true; 
         counter = 1;
-		root->left->insert(v);
     }
     else
         counter += root->left->insert(v); //call NODE::insert

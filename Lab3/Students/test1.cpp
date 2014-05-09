@@ -40,7 +40,8 @@ int main()
     *PHASE 1: insert()                                    *
     *         create the tree of slide 9, Fö 6            *
     *******************************************************/
-    cout << "\**TEST PHASE 1: insert"
+   
+    cout << "**TEST PHASE 1: insert"
         << endl << endl;
 
     string V[] = {"6", "4", "5", "8", "7", "2"};
