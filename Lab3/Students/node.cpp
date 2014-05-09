@@ -26,12 +26,18 @@ Node::~Node()
 }
 
 
-//Insert v in the tree having as root this node
+//Insert v in the tree having as root this node (╯°□°)╯︵ ┻━┻
 //Return true, if v was inserted
 //Otherwise, return false --v already exists in the tree
 bool Node::insert(ELEMENT v)
 {
-    //ADD CODE
+	Node *p = find(v.first);
+	if( p == nullptr)
+	{
+		p = new Node(v, nullptr, nullptr);
+	}
+
+	p->value.second++;
     return false;
 }
 
@@ -72,8 +78,21 @@ void Node::removeMe(Node* parent, bool isRight)
 //If there is no node storing key then return nullptr
 Node* Node::find(string key)
 {
-    //ADD CODE
-    return nullptr;
+    /*
+    Node *temp = root;
+	if(!empty())
+	{
+		while( temp != nullptr && temp->value.first != key)
+		{
+			if(temp->value.first < key)
+				temp = temp->right;
+			else
+				temp = temp->left;
+		}
+		return temp;
+	}
+	return nullptr;
+	*/
 }
 
 

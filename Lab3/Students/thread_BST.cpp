@@ -34,15 +34,17 @@ BST_threaded::~BST_threaded()
 //Test if the tree is empty
 bool BST_threaded::empty() const
 {
-    //ADD CODE
-    return true;
+    if(counter == 0)
+	{
+		return true;
+	}
+    return false;
 }
 
 //Return mumber of keys (elements) stored in the tree
 int BST_threaded::size() const
 {
-   //ADD CODE
-    return 0;
+    return counter;
 }
 
 
@@ -55,6 +57,7 @@ void BST_threaded::insert(ELEMENT v)
         root->left = new Node(v, root, root);
         root->left->l_thread = root->left->r_thread = true;
         counter = 1;
+		root->left->insert(v);
     }
     else
         counter += root->left->insert(v); //call NODE::insert
@@ -64,7 +67,7 @@ void BST_threaded::insert(ELEMENT v)
 //Remove node with key from the tree
 void BST_threaded::remove(string key)
 {
-   //ADD CODE
+   //counter -= root->left->remove eller nåt;
 }
 
 
