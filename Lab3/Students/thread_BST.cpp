@@ -20,7 +20,8 @@ using namespace std;
 BST_threaded::BST_threaded()
  : counter(0)
 {
-    //ADD CODE
+    ELEMENT v;
+    root = new Node(v, nullptr, nullptr);
 }
 
 
@@ -34,15 +35,17 @@ BST_threaded::~BST_threaded()
 //Test if the tree is empty
 bool BST_threaded::empty() const
 {
-    // kolla om root pekar pÃ¥ null(?)
-    return true;
+     if(counter == 0)
+	{
+		return true;
+	}
+    return false;
 }
 
 //Return mumber of keys (elements) stored in the tree
 int BST_threaded::size() const
 {
-    // 
-    return 0;
+    return counter;
 }
 
 
@@ -53,7 +56,7 @@ void BST_threaded::insert(ELEMENT v)
     {
         //Insert first node of the BST has a left child of the BST
         root->left = new Node(v, root, root);
-        root->left->l_thread = root->left->r_thread = true;
+        root->left->l_thread = root->left->r_thread = true; 
         counter = 1;
     }
     else
@@ -64,7 +67,7 @@ void BST_threaded::insert(ELEMENT v)
 //Remove node with key from the tree
 void BST_threaded::remove(string key)
 {
-   //ADD CODE
+   //counter -= root->left->remove eller nåt;
 }
 
 

@@ -32,7 +32,6 @@ Node::~Node()
 bool Node::insert(ELEMENT v)
 {
     Node *temp = this;
-
 	while( temp != nullptr && temp->value.first != v.first)
 	{
 		if(temp->value.first < v.first)
