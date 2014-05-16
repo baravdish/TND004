@@ -26,12 +26,41 @@ Node::~Node()
 }
 
 
-//Insert v in the tree having as root this node
+//Insert v in the tree having as root this node (╯°□°)╯︵ ┻━┻
 //Return true, if v was inserted
-//Otherwise, return false --v already exists in the tree
+//Otherwise, return false -- v already exists in the tree
 bool Node::insert(ELEMENT v)
 {
-    //ADD CODE
+    Node *temp = this;
+
+	while( temp != nullptr && temp->value.first != v.first)
+	{
+		if(temp->value.first < v.first)
+		{
+			if(temp->r_thread == true)
+			{
+				temp->right = new Node(v, temp, temp->right);					
+				temp->right->l_thread = true;
+				temp->right->r_thread = true;
+				temp->r_thread = false;
+				return true;
+			}
+			temp = temp->right;
+		}
+		else
+		{
+			if(temp->l_thread == true)
+			{
+				temp->left = new Node(v, temp->left, temp);
+				temp->left->l_thread = true;
+				temp->left->r_thread = true;
+				temp->l_thread = false;
+				return true;
+			}
+			temp = temp->left;
+		}
+	}
+	temp->value.second++;
     return false;
 }
 
@@ -72,8 +101,24 @@ void Node::removeMe(Node* parent, bool isRight)
 //If there is no node storing key then return nullptr
 Node* Node::find(string key)
 {
-    //ADD CODE
-    return nullptr;
+    Node *temp = this;
+	if(temp->value.first == key)
+		return temp;
+	
+	cout<<temp->value.first << endl;
+	
+	while( temp != nullptr && temp->value.first != key)
+	{
+		if(temp->value.first < key)
+			temp = temp->right;
+		else
+			temp = temp->left;
+	}
+	if(temp == nullptr)
+		return nullptr;
+		
+	
+	return temp;
 }
 
 

@@ -34,14 +34,14 @@ BST_threaded::~BST_threaded()
 //Test if the tree is empty
 bool BST_threaded::empty() const
 {
-    //ADD CODE
+    // kolla om root pekar på null(?)
     return true;
 }
 
 //Return mumber of keys (elements) stored in the tree
 int BST_threaded::size() const
 {
-   //ADD CODE
+    // 
     return 0;
 }
 

@@ -151,7 +151,13 @@ void SpellChecker::createLog(ostream& os)
     os << "*** LIST OF MISSPELLINGS" << endl;
     os << "=========================" << endl;
 
-    //ADD CODE
+    list<Item*>::const_iterator it = misspellings.begin();
+    for(; it != misspellings.end(); ++it)
+    {
+        os<<*it<<endl;
+    }
+
+    
 }
 
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */
