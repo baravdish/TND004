@@ -9,6 +9,7 @@
 #ifndef NODE_H
 #define NODE_H
 
+#include <sstream>
 #include <iostream>
 #include <string>
 #include <utility> //to use pair template

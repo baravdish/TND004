@@ -56,7 +56,7 @@ void BST_threaded::insert(ELEMENT v)
     {
         //Insert first node of the BST has a left child of the BST
         root->left = new Node(v, root, root);
-        root->left->l_thread = root->left->r_thread = true; 
+        root->left->l_thread = root->left->r_thread = true;
         counter = 1;
     }
     else
@@ -67,7 +67,7 @@ void BST_threaded::insert(ELEMENT v)
 //Remove node with key from the tree
 void BST_threaded::remove(string key)
 {
-   //counter -= root->left->remove eller n�t;
+   //counter -= root->left->remove eller nåt;
 }
 
 
@@ -78,10 +78,16 @@ void BST_threaded::remove(string key)
 //then behaviour is undefined
 ELEMENT& BST_threaded::operator[](string key)
 {
-    //ADD CODE
-    ELEMENT e("", 0);
+    // det krashar om man direkt returnar ett element(VARFÖR?????). Måste gå via en nod. D.v.s. return temp->value(!!!!!!!!!!)
 
-    return e; //MUST remove this code
+    ELEMENT e(" ", 0);
+    Node *p = new Node(e, nullptr, nullptr);
+    Node *temp = root->left->find(key);
+
+    if(temp == nullptr)
+        return p->value;
+
+    return temp->value;
 }
 
 
@@ -90,16 +96,26 @@ ELEMENT& BST_threaded::operator[](string key)
 //Otherwise, return this->end().
 BiIterator BST_threaded::find(string key) const
 {
-    //ADD CODE
-    return end();
+    Node *temp = root->left->find(key);
+
+    if(temp != nullptr)
+    {
+        BiIterator it(temp);
+        return it;
+    }
+    if(temp == nullptr)
+        cout<<"20 finns ej....";
+
+    return this->end();
 }
 
 
 //Return an iterator referring to the first node in the inorder traversal of the BST
 BiIterator BST_threaded::begin() const
 {
-    //ADD CODE
-    return end();
+    Node *temp = root->left->findMin();
+    BiIterator it(temp);
+    return it;
 }
 
 

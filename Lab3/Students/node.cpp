@@ -32,13 +32,21 @@ Node::~Node()
 bool Node::insert(ELEMENT v)
 {
     Node *temp = this;
+
+    istringstream issKey(v.first);
+    int val = 0;
+    int intKey = 0;
+    issKey>>intKey;
+
 	while( temp != nullptr && temp->value.first != v.first)
 	{
-		if(temp->value.first < v.first)
+		istringstream is(temp->value.first);
+		is>>val;
+		if(val < intKey)
 		{
 			if(temp->r_thread == true)
 			{
-				temp->right = new Node(v, temp, temp->right);					
+				temp->right = new Node(v, temp, temp->right);
 				temp->right->l_thread = true;
 				temp->right->r_thread = true;
 				temp->r_thread = false;
@@ -101,22 +109,34 @@ void Node::removeMe(Node* parent, bool isRight)
 Node* Node::find(string key)
 {
     Node *temp = this;
+
+    istringstream issKey(key);
+	int val = 0;
+    int intKey = 0;
+    issKey>>intKey;
+
 	if(temp->value.first == key)
 		return temp;
-	
-	cout<<temp->value.first << endl;
-	
+
 	while( temp != nullptr && temp->value.first != key)
 	{
-		if(temp->value.first < key)
+		istringstream is(temp->value.first);
+		is>>val;
+		if(val < intKey)
+		{
+			// cout<<val<<" < "<<intKey<<endl;
 			temp = temp->right;
+		}
 		else
+		{
+			// cout<<temp->value.first<<" > "<<key<<endl;
 			temp = temp->left;
+		}
 	}
 	if(temp == nullptr)
 		return nullptr;
-		
-	
+
+
 	return temp;
 }
 
@@ -125,8 +145,14 @@ Node* Node::find(string key)
 //of the tree whose root is this node
 Node* Node::findMin()
 {
-    //ADD CODE
-    return nullptr;
+    // Går att göra recurs
+	Node *temp = this;
+    while(temp->l_thread == false)
+    {
+    	cout<<temp->value.first<<endl;
+    	temp = temp->left;
+    }
+    return temp;
 }
 
 
@@ -134,8 +160,13 @@ Node* Node::findMin()
 //of the tree whose root is this node
 Node* Node::findMax()
 {
-    //ADD CODE
-    return nullptr;
+	Node *temp = this;
+    while(temp->r_thread == false)
+    {
+    	cout<<temp->value.first<<endl;
+    	temp = temp->right;
+    }
+    return temp;
 }
 
 
